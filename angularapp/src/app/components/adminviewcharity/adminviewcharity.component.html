@@ -1,0 +1,37 @@
+<app-adminnav> </app-adminnav>
+<h2 class="text-center mt-4">All Charities</h2>
+<input type="text" placeholder="Search By Charity Name" [(ngModel)]="searchTitle" (input)="searchCharity()" class="rounded border-0 bg-light w-25 p-2">
+<div class="d-flex justify-content-center align-items-center mt-4">
+    <table border="1" class="table table-hover w-75">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Charity Name</th>
+                <th>Description</th>
+                <th>Founder</th>
+                <th>Creation Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    
+        <tbody *ngIf="charities.length > 0">
+            <tr *ngFor="let charity of charities,index as i">
+                <td>{{i+1}}</td>
+                <td>{{charity.charityName}}</td>
+                <td>{{charity.description}}</td>
+                <td>{{charity.founder}}</td>
+                <td>{{charity.creationDate}}</td>
+                <td>{{charity.status}}</td>
+                <td><i (click)="editCharity(charity.charityId)" class="fa-regular fa-pen-to-square me-3"></i><i (click)="deleteCharity(charity.charityId)" class="fa-solid fa-trash me-3"></i>
+                <i (click)="checkDonation(charity.charityId)" class="fa-solid fa-hand-holding-dollar"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="isLoading" class="loader">
+    <div class="spinner-grow text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>          
+</div>

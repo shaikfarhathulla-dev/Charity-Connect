@@ -1,0 +1,47 @@
+<app-adminnav> </app-adminnav>
+
+    <h2 class="text-center mt-4">Feedback Details</h2>
+    <div class="d-flex justify-content-center align-items-center mt-4">
+        <table border="1" class="table table-hover w-75">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>User Name</th>
+                    <th>Feedback</th>
+                    <th>Posted Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="feedbacks.length > 0">
+                <tr *ngFor="let f of feedbacks;index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{f.user.username}}</td>
+                    <td>{{f.feedbackText}}</td>
+                    <td>{{f.date}}</td>
+                    <td><i class="fa-solid fa-user ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal" style="color: #feae01;" (click)="showProfile(f)"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="isLoading" class="loader">
+        <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>          
+    </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">User Profile</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div *ngIf="flag==true">
+                <p><span class="fw-bold">Email:</span> {{selectedFeedback.user.email}}</p>
+                <p><span class="fw-bold">User Name:</span> {{selectedFeedback.user.username}}</p>
+                <p><span class="fw-bold">Mobile Number:</span> {{selectedFeedback.user.mobileNumber}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
